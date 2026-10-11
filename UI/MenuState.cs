@@ -45,7 +45,7 @@ namespace SpawnRateScaler.UI
             currentRate = new("---", 0.8f)
             {
                 HAlign = 0.5f,
-                VAlign = 0.20f
+                VAlign = 0.25f
             };
             panel.Append(currentRate);
 
