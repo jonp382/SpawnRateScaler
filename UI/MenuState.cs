@@ -20,6 +20,13 @@ namespace SpawnRateScaler.UI
 			titleText.HAlign = 0.5f;
 			panel.Append(titleText);
 
+            CustomSlider Slider = new(200f, 50f)
+            {
+                HAlign = 0.5f,
+                VAlign = 0.5f
+            };
+            panel.Append(Slider);
+
 			Append(panel);
         }
 	}
