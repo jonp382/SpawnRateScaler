@@ -1,0 +1,3 @@
+displayName = Spawn Rate Scaler
+author = aaa
+version = 0.1
