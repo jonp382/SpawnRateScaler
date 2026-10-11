@@ -19,28 +19,30 @@ namespace SpawnRateScaler.UI
 			panel = new();
 
             // main panel
-			panel.Width.Set(300f, 0f);
-			panel.Height.Set(200f, 0f);
+			panel.Width.Set(250f, 0f);
+			panel.Height.Set(100f, 0f);
 
-			panel.Left.Set(400f, 0f);
+			panel.Left.Set(100f, 0f);
 			panel.Top.Set(400f, 0f);
 
             // header text
-			UIText titleText = new("Test Menu");
-			titleText.Top.Set(10f, 0f);
-			titleText.HAlign = 0.5f;
+			UIText titleText = new("Spawn Rates", 0.8f)
+            {
+			    HAlign = 0.5f,
+                VAlign = 0.05f  
+            };
 			panel.Append(titleText);
 
             // slider
             slider = new(200f, 50f)
             {
                 HAlign = 0.5f,
-                VAlign = 0.5f
+                VAlign = 1.0f
             };
             panel.Append(slider);
 
             // current rate text
-            currentRate = new("---")
+            currentRate = new("---", 0.8f)
             {
                 HAlign = 0.5f,
                 VAlign = 0.35f
@@ -48,11 +50,11 @@ namespace SpawnRateScaler.UI
             panel.Append(currentRate);
 
             // lock button
-            lockButton = new("Lock", 0.60f, false);
-            lockButton.Width.Set(20f, 0f);
-            lockButton.Height.Set(20f, 0f);
+            lockButton = new("Lock", 0.50f, false);
+            lockButton.Width.Set(15f, 0f);
+            lockButton.Height.Set(15f, 0f);
 
-            lockButton.HAlign = 0.95f;
+            lockButton.HAlign = 1.0f;
             lockButton.VAlign = 0.025f;
 
             lockButton.OnLeftClick += ToggleLockPanel;
