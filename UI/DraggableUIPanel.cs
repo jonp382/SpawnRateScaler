@@ -9,6 +9,7 @@ namespace SpawnRateScaler.UI
     public class DraggableUIPanel : UIPanel
     {
         private bool isDragging = false;
+        public bool isLocked = false;
         private Vector2 offset;
 
         public override void LeftMouseDown(UIMouseEvent evt)
@@ -27,6 +28,7 @@ namespace SpawnRateScaler.UI
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
+            if(isLocked) return;
 
             if (isDragging)
             {
@@ -43,7 +45,7 @@ namespace SpawnRateScaler.UI
                         0f,
                         Main.screenHeight - Height.Pixels),
                     0f);
-                    
+
                 Recalculate();
             }
 

@@ -11,6 +11,7 @@ namespace SpawnRateScaler.UI
         private float _value = 0f; // bounde between 0.0 and 1.0
         public float Value { get => _value; set => _value = MathHelper.Clamp(value, 0f, 1f); }
         private bool dragging = false;
+        public bool isLocked = false;
 
         public CustomSlider(float width, float height)
         {
@@ -41,6 +42,8 @@ namespace SpawnRateScaler.UI
 
         private void UpdateSliderValue()
         {
+            if(isLocked) return;
+            
             CalculatedStyle dimensions = GetInnerDimensions();
             float mouseX = Main.mouseX;
             float relativeX = mouseX - dimensions.X;
