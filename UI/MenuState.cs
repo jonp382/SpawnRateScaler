@@ -52,6 +52,8 @@ namespace SpawnRateScaler.UI
 
             // ------
 			Append(panel);
+
+            ToggleLockPanel(null, null);
         }
 
         private void ToggleLockPanel(UIMouseEvent evt, UIElement listeningElement)
