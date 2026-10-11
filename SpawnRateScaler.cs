@@ -72,7 +72,7 @@ namespace SpawnRateScaler
     {
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
-            float multiplier = SpawnRateScaler.cachedSliderValue * 10;
+            float multiplier = SpawnRateScaler.cachedSliderValue;
 
 			if(multiplier <= 0.06f) // if its this low the user probably wants 0.0
 			{

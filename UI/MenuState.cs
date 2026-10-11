@@ -48,6 +48,11 @@ namespace SpawnRateScaler.UI
                 VAlign = 0.25f
             };
             panel.Append(currentRate);
+            slider.OnSliderChanged += (newValue) =>
+            {
+                float rate = slider.GetSpawnRate();
+                currentRate.SetText($"Multiplier: {rate:F1}");
+            };
 
             // lock button
             lockButton = new("Lock", 0.50f, false);
@@ -82,7 +87,7 @@ namespace SpawnRateScaler.UI
             };
             resetButton.OnLeftClick += (evt, elm) => 
             {
-                slider.OverrideSliderValue(0.1f);
+                slider.OverrideSliderValue(0.5f);
                 Terraria.Audio.SoundEngine.PlaySound(Terraria.ID.SoundID.MenuTick);
             };
             panel.Append(resetButton);
@@ -104,12 +109,13 @@ namespace SpawnRateScaler.UI
 			Append(panel);
 
             ToggleLockPanel(null, null);
+            slider.OverrideSliderValue(0.5f); // Reset it to 1.0x
         }
 
         public float GetSliderValue()
         {
-            currentRate.SetText($"Multiplier: {slider.Value * 10:F1}");
-            return slider.Value;
+            float rate = slider.GetSpawnRate();
+            return rate;
         }
 
         private void ToggleLockPanel(UIMouseEvent evt, UIElement listeningElement)

@@ -3,13 +3,30 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.UI;
+using System;
 
 namespace SpawnRateScaler.UI
 {
     public class CustomSlider : UIElement
     {
         private float _value = 0f; // bounde between 0.0 and 1.0
-        public float Value { get => _value; set => _value = MathHelper.Clamp(value, 0f, 1f); }
+
+        public event Action<float> OnSliderChanged;
+        public float Value
+        {
+            get => _value;
+
+            set
+            {
+                float clampedValue = MathHelper.Clamp(value, 0f, 1f);
+
+                if(_value != clampedValue)
+                {
+                    _value = clampedValue;
+                    OnSliderChanged?.Invoke(_value);
+                }
+            }
+        }
         private bool dragging = false;
         public bool isLocked = false;
 
@@ -49,6 +66,11 @@ namespace SpawnRateScaler.UI
             float mouseX = Main.mouseX;
             float relativeX = mouseX - dimensions.X;
             Value = relativeX / dimensions.Width;
+        }
+
+        public float GetSpawnRate()
+        {
+            return Converters.Converters.ConvertToSpawnRate(Value);
         }
 
         public void OverrideSliderValue(float newValue) => Value = newValue;
