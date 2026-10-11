@@ -10,6 +10,7 @@ namespace SpawnRateScaler.UI
         public DraggableUIPanel panel;
         public CustomSlider slider;
         public UITextPanel<string> lockButton;
+        public UIText currentRate;
 
         private bool locked = false;
 
@@ -38,6 +39,14 @@ namespace SpawnRateScaler.UI
             };
             panel.Append(slider);
 
+            // current rate text
+            currentRate = new("---")
+            {
+                HAlign = 0.5f,
+                VAlign = 0.35f
+            };
+            panel.Append(currentRate);
+
             // lock button
             lockButton = new("Lock", 0.60f, false);
             lockButton.Width.Set(20f, 0f);
@@ -54,6 +63,12 @@ namespace SpawnRateScaler.UI
 			Append(panel);
 
             ToggleLockPanel(null, null);
+        }
+
+        public float GetSliderValue()
+        {
+            currentRate.SetText($"Multiplier: {slider.Value * 10:F1}");
+            return slider.Value;
         }
 
         private void ToggleLockPanel(UIMouseEvent evt, UIElement listeningElement)

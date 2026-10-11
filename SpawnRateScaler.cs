@@ -17,6 +17,8 @@ namespace SpawnRateScaler
 	{
 		private UserInterface myUserInterface;
 		private MyMenuState myMenuState;
+		public static float cachedSliderValue;
+
 		public override void PostSetupContent()
 		{
 			if (!Main.dedServ)
@@ -34,6 +36,12 @@ namespace SpawnRateScaler
 			if(Main.playerInventory){
 				if(myUserInterface?.CurrentState == null) myUserInterface.SetState(myMenuState);
 				myUserInterface.Update(gameTime);
+
+				if(cachedSliderValue != myMenuState.GetSliderValue()) 
+				{
+					cachedSliderValue = myMenuState.GetSliderValue();
+					// used by SpawnRateGlobalNPC
+				}
 			}
 			else
 			{
@@ -60,7 +68,23 @@ namespace SpawnRateScaler
 		}
 	}
 
-	
+	public class SpawnRateGlobalNPC : GlobalNPC
+    {
+        public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+            float multiplier = SpawnRateScaler.cachedSliderValue * 10;
 
+			if(multiplier <= 0f)
+			{
+				maxSpawns = 0;
+				spawnRate = int.MaxValue;
+				return;
+			}
+
+			spawnRate = (int)(spawnRate / multiplier);
+			maxSpawns = (int)(maxSpawns * multiplier);
+
+        }
+    }
 	
 }
