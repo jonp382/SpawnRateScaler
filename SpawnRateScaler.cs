@@ -74,7 +74,7 @@ namespace SpawnRateScaler
         {
             float multiplier = SpawnRateScaler.cachedSliderValue * 10;
 
-			if(multiplier <= 0f)
+			if(multiplier <= 0.06f) // if its this low the user probably wants 0.0
 			{
 				maxSpawns = 0;
 				spawnRate = int.MaxValue;

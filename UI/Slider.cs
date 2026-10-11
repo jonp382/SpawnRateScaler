@@ -17,6 +17,7 @@ namespace SpawnRateScaler.UI
         {
             Width.Set(width, 0f);
             Height.Set(height, 0f);
+            Value = 0.1f; // *10 so this is 1.0
         }
 
         public override void LeftMouseDown(UIMouseEvent evt)
