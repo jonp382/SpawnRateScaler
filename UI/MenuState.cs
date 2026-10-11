@@ -20,7 +20,7 @@ namespace SpawnRateScaler.UI
 
             // main panel
 			panel.Width.Set(250f, 0f);
-			panel.Height.Set(100f, 0f);
+			panel.Height.Set(150f, 0f);
 
 			panel.Left.Set(100f, 0f);
 			panel.Top.Set(400f, 0f);
@@ -37,7 +37,7 @@ namespace SpawnRateScaler.UI
             slider = new(200f, 50f)
             {
                 HAlign = 0.5f,
-                VAlign = 1.0f
+                VAlign = 0.50f
             };
             panel.Append(slider);
 
@@ -45,7 +45,7 @@ namespace SpawnRateScaler.UI
             currentRate = new("---", 0.8f)
             {
                 HAlign = 0.5f,
-                VAlign = 0.35f
+                VAlign = 0.20f
             };
             panel.Append(currentRate);
 
@@ -60,6 +60,45 @@ namespace SpawnRateScaler.UI
             lockButton.OnLeftClick += ToggleLockPanel;
 
             panel.Append(lockButton);
+
+            // 0x button
+            UITextPanel<string> zeroButton = new("Zero", 0.8f)
+            {
+                HAlign = 0.0f,
+                VAlign = 1.0f
+            };
+            zeroButton.OnLeftClick += (evt, elm) => 
+            {
+                slider.OverrideSliderValue(0.0f);
+                Terraria.Audio.SoundEngine.PlaySound(Terraria.ID.SoundID.MenuTick);
+            };
+            panel.Append(zeroButton);
+
+            // 1x button
+            UITextPanel<string> resetButton = new("Reset", 0.8f)
+            {
+                HAlign = 0.5f,
+                VAlign = 1.0f
+            };
+            resetButton.OnLeftClick += (evt, elm) => 
+            {
+                slider.OverrideSliderValue(0.1f);
+                Terraria.Audio.SoundEngine.PlaySound(Terraria.ID.SoundID.MenuTick);
+            };
+            panel.Append(resetButton);
+
+            // Max/10x button
+            UITextPanel<string> maxButton = new("MAX", 0.8f)
+            {
+                HAlign = 1.0f,
+                VAlign = 1.0f
+            };
+            maxButton.OnLeftClick += (evt, elm) => 
+            {
+                slider.OverrideSliderValue(1.0f);
+                Terraria.Audio.SoundEngine.PlaySound(Terraria.ID.SoundID.MenuTick);
+            };
+            panel.Append(maxButton);
 
             // ------
 			Append(panel);

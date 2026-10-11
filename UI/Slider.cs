@@ -51,6 +51,8 @@ namespace SpawnRateScaler.UI
             Value = relativeX / dimensions.Width;
         }
 
+        public void OverrideSliderValue(float newValue) => Value = newValue;
+
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             CalculatedStyle dimensions = GetInnerDimensions();
